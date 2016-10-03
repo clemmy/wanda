@@ -1,6 +1,6 @@
 {
   "name": "wanda",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Simple gesture recognition library for Javascript using $P algorithm.",
   "main": "dist/wanda.js",
   "scripts": {

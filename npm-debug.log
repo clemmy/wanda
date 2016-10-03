@@ -1,0 +1,112 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/clementhoang/n/bin/node',
+1 verbose cli   '/Users/clementhoang/n/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.10.3
+3 info using node@v6.6.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   escapedName: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/clementhoang/Workspace/wanda',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/clementhoang/.npm/wanda/1.0.0/package.tgz not in flight; packing
+9 verbose correctMkdir /Users/clementhoang/.npm correctMkdir not in flight; initializing
+10 info lifecycle wanda@1.0.0~prepublish: wanda@1.0.0
+11 silly lifecycle wanda@1.0.0~prepublish: no script for prepublish, continuing
+12 verbose tar pack [ '/Users/clementhoang/.npm/wanda/1.0.0/package.tgz',
+12 verbose tar pack   '/Users/clementhoang/Workspace/wanda' ]
+13 verbose tarball /Users/clementhoang/.npm/wanda/1.0.0/package.tgz
+14 verbose folder /Users/clementhoang/Workspace/wanda
+15 verbose addLocalTarball adding from inside cache /Users/clementhoang/.npm/wanda/1.0.0/package.tgz
+16 verbose correctMkdir /Users/clementhoang/.npm correctMkdir not in flight; initializing
+17 silly cache afterAdd wanda@1.0.0
+18 verbose afterAdd /Users/clementhoang/.npm/wanda/1.0.0/package/package.json not in flight; writing
+19 verbose correctMkdir /Users/clementhoang/.npm correctMkdir not in flight; initializing
+20 verbose afterAdd /Users/clementhoang/.npm/wanda/1.0.0/package/package.json written
+21 silly publish { name: 'wanda',
+21 silly publish   version: '1.0.0',
+21 silly publish   description: 'Simple gesture recognition library for Javascript using $P algorithm.',
+21 silly publish   main: 'dist/wanda.js',
+21 silly publish   scripts: { build: 'webpack --config webpack.config.js', test: 'ava' },
+21 silly publish   author: { name: 'clemmy' },
+21 silly publish   license: 'MIT',
+21 silly publish   repository: { type: 'git', url: 'git+https://github.com/clemmy/wanda.git' },
+21 silly publish   devDependencies:
+21 silly publish    { ava: '^0.16.0',
+21 silly publish      'babel-core': '^6.17.0',
+21 silly publish      'babel-loader': '^6.2.5',
+21 silly publish      'babel-preset-es2015': '^6.16.0',
+21 silly publish      'babel-preset-stage-0': '^6.16.0' },
+21 silly publish   readme: '# wanda\n\nWanda is a Javascript gesture recognition library based on the [$P recognizer](http://depts.washington.edu/aimgroup/proj/dollar/pdollar.html). It\'s written with the UMD pattern, so it can be used anywhere.\n\n## Usage\n\n```\nnpm install --save wanda\n```\n\nThen, in your codebase,\n\n```\nimport Wanda from \'wanda\';\n\nconst wanda = new Wanda();\n\nwanda.train(id, data);\n\nconst result = wanda.recognize(data);\n```\n\n### API\n\n#### Wanda.train(id, data)\n\nAdd training data to wanda. ```id``` is a string identifier for the data. ```data``` is an array of strokes, where a stroke is an array of points. It will look something like this:\n\n```\n[\n  [{x: 30, y: 146}, {x: 106, y: 222}], // stroke 1\n  [{x: 30, y: 225}, {x: 106, y: 146}] // stroke 2\n]\n```\n\n#### Wanda.recognize(data)\n\nRecognize a gesture. ```data``` is an array of strokes, where a stroke is an array of points, the same as described above. This method will return a result that looks like the following:\n\n```\n{\n  id: \'<result id>\',\n  score: <confidence>\n}\n```\n\n## Development\n\nInstall the dependencies with\n\n```\nnpm install\n```\n\n## Running the tests\n\nTesting for Wanda is done using [Ava](https://github.com/avajs/ava).\n\n```\nnpm run test\n```\n\n## Built With\n\n* Javascript\n* :heart:\n\n## License\n\nThis project is licensed under the MIT License.\n\n## Acknowledgments\n\n* Radu-Daniel Vatavu, University Stefan cel Mare of Suceava\n* Lisa Anthony, University of Maryland—Baltimore County\n* Jacob O. Wobbrock, University of Washington\n',
+21 silly publish   readmeFilename: 'README.md',
+21 silly publish   gitHead: 'ccb083af3b82849674132237f88056f3ab5f1d8a',
+21 silly publish   bugs: { url: 'https://github.com/clemmy/wanda/issues' },
+21 silly publish   homepage: 'https://github.com/clemmy/wanda#readme',
+21 silly publish   _id: 'wanda@1.0.0',
+21 silly publish   _shasum: 'e91a70a9bd2a169b8d1f83fe1b10e84eaa13529d',
+21 silly publish   _from: '.' }
+22 verbose getPublishConfig undefined
+23 silly mapToRegistry name wanda
+24 silly mapToRegistry using default registry
+25 silly mapToRegistry registry https://registry.npmjs.org/
+26 silly mapToRegistry data Result {
+26 silly mapToRegistry   raw: 'wanda',
+26 silly mapToRegistry   scope: null,
+26 silly mapToRegistry   escapedName: 'wanda',
+26 silly mapToRegistry   name: 'wanda',
+26 silly mapToRegistry   rawSpec: '',
+26 silly mapToRegistry   spec: 'latest',
+26 silly mapToRegistry   type: 'tag' }
+27 silly mapToRegistry uri https://registry.npmjs.org/wanda
+28 verbose publish registryBase https://registry.npmjs.org/
+29 silly publish uploading /Users/clementhoang/.npm/wanda/1.0.0/package.tgz
+30 verbose request uri https://registry.npmjs.org/wanda
+31 verbose request sending authorization for write operation
+32 info attempt registry request try #1 at 6:04:27 PM
+33 verbose request using bearer token for auth
+34 verbose request id 239f9771730714a8
+35 http request PUT https://registry.npmjs.org/wanda
+36 http 403 https://registry.npmjs.org/wanda
+37 verbose headers { 'content-type': 'application/json',
+37 verbose headers   'cache-control': 'max-age=300',
+37 verbose headers   'content-length': '95',
+37 verbose headers   'accept-ranges': 'bytes',
+37 verbose headers   date: 'Mon, 03 Oct 2016 22:04:28 GMT',
+37 verbose headers   via: '1.1 varnish',
+37 verbose headers   connection: 'keep-alive',
+37 verbose headers   'x-served-by': 'cache-ord1734-ORD',
+37 verbose headers   'x-cache': 'MISS',
+37 verbose headers   'x-cache-hits': '0',
+37 verbose headers   'x-timer': 'S1475532267.683973,VS0,VE606',
+37 verbose headers   vary: 'Accept-Encoding' }
+38 verbose request invalidating /Users/clementhoang/.npm/registry.npmjs.org/wanda on PUT
+39 error publish Failed PUT 403
+40 verbose stack Error: "You cannot publish over the previously published version 1.0.0." : wanda
+40 verbose stack     at makeError (/Users/clementhoang/n/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+40 verbose stack     at CachingRegistryClient.<anonymous> (/Users/clementhoang/n/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+40 verbose stack     at Request._callback (/Users/clementhoang/n/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+40 verbose stack     at Request.self.callback (/Users/clementhoang/n/lib/node_modules/npm/node_modules/request/request.js:200:22)
+40 verbose stack     at emitTwo (events.js:106:13)
+40 verbose stack     at Request.emit (events.js:191:7)
+40 verbose stack     at Request.<anonymous> (/Users/clementhoang/n/lib/node_modules/npm/node_modules/request/request.js:1067:10)
+40 verbose stack     at emitOne (events.js:101:20)
+40 verbose stack     at Request.emit (events.js:188:7)
+40 verbose stack     at IncomingMessage.<anonymous> (/Users/clementhoang/n/lib/node_modules/npm/node_modules/request/request.js:988:12)
+41 verbose statusCode 403
+42 verbose pkgid wanda
+43 verbose cwd /Users/clementhoang/Workspace/wanda
+44 error Darwin 15.6.0
+45 error argv "/Users/clementhoang/n/bin/node" "/Users/clementhoang/n/bin/npm" "publish"
+46 error node v6.6.0
+47 error npm  v3.10.3
+48 error code E403
+49 error "You cannot publish over the previously published version 1.0.0." : wanda
+50 error If you need help, you may report this error at:
+50 error     <https://github.com/npm/npm/issues>
+51 verbose exit [ 1, true ]
