@@ -60,8 +60,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
-	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _point = __webpack_require__(1);
@@ -97,25 +95,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	  _createClass(Wanda, [{
 	    key: 'train',
 	    value: function train(id, data) {
-	      console.log('training');
-	      var flattened = data.map(function (stroke, i) {
-	        return stroke.map(function (point) {
-	          return _extends({}, point, {
-	            strokeId: i + 1
-	          });
-	        });
-	      }).reduce(function (a, b) {
-	        return a.concat(b);
-	      }, []).map(function (point) {
-	        return new _point2.default(point.x, point.y, point.strokeId);
-	      });
+	      var points = (0, _utils.transformData)(data);
 
-	      this.templates.push(new _cloud2.default(id, flattened));
+	      this.templates.push(new _cloud2.default(id, points));
 	    }
 	  }, {
 	    key: 'recognize',
-	    value: function recognize(points) {
-	      console.log('recognize');
+	    value: function recognize(data) {
+	      var points = (0, _utils.transformData)(data);
 	      points = (0, _utils.resample)(points, _constants2.default.NUM_POINTS);
 	      points = (0, _utils.scale)(points);
 	      points = (0, _utils.translateTo)(points, _constants2.default.ORIGIN);
@@ -223,6 +210,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	exports.pathDistance = pathDistance;
 	exports.pathLength = pathLength;
 	exports.distance = distance;
+	exports.transformData = transformData;
 
 	var _point = __webpack_require__(1);
 
@@ -276,10 +264,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	  return sum;
 	}
 
-	function resample(points) {
+	function resample(points, n) {
 	  var I = pathLength(points) / (n - 1); // interval length
 	  var D = 0.0;
-	  var newpoints = new Array(points[0]);
+	  var newPoints = new Array(points[0]);
 
 	  for (var i = 1; i < points.length; ++i) {
 	    if (points[i].strokeId === points[i - 1].strokeId) {
@@ -330,12 +318,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	}
 
 	function translateTo(points, destination) {
-	  var centroid = centroid(points);
+	  var c = centroid(points);
 	  var newPoints = [];
 
 	  for (var i = 0; i < points.length; ++i) {
-	    var qx = points[i].x + destination.x - centroid.x;
-	    var qy = points[i].y + destination.y - centroid.y;
+	    var qx = points[i].x + destination.x - c.x;
+	    var qy = points[i].y + destination.y - c.y;
 
 	    newPoints.push(new _point2.default(qx, qy, points[i].strokeId));
 	  }
@@ -390,6 +378,24 @@ return /******/ (function(modules) { // webpackBootstrap
 	  var dy = p2.y - p1.y;
 
 	  return Math.sqrt(dx * dx + dy * dy);
+	}
+
+	function transformData(data) {
+	  var flattened = data.map(function (stroke, i) {
+	    return stroke.map(function (point) {
+	      return {
+	        x: point.x,
+	        y: point.y,
+	        strokeId: i + 1
+	      };
+	    });
+	  }).reduce(function (a, b) {
+	    return a.concat(b);
+	  }, []).map(function (point) {
+	    return new _point2.default(point.x, point.y, point.strokeId);
+	  });
+
+	  return flattened;
 	}
 
 /***/ },

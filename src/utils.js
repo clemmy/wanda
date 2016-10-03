@@ -46,10 +46,10 @@ export function cloudDistance(points1, points2, start) {
   return sum
 }
 
-export function resample(points) {
+export function resample(points, n) {
   const I = pathLength(points) / (n - 1) // interval length
   let D = 0.0;
-  const newpoints = new Array(points[0])
+  const newPoints = new Array(points[0])
 
   for (let i=1; i<points.length; ++i) {
     if (points[i].strokeId === points[i-1].strokeId) {
@@ -101,12 +101,12 @@ export function scale(points) {
 }
 
 export function translateTo(points, destination) {
-  const centroid = centroid(points)
+  const c = centroid(points)
   const newPoints = []
 
   for (let i=0; i<points.length; ++i) {
-    let qx = points[i].x + destination.x - centroid.x
-    let qy = points[i].y + destination.y - centroid.y
+    let qx = points[i].x + destination.x - c.x
+    let qy = points[i].y + destination.y - c.y
 
     newPoints.push(new Point(qx, qy, points[i].strokeId))
   }
@@ -161,4 +161,20 @@ export function distance(p1, p2) {
   const dy = p2.y - p1.y
 
   return Math.sqrt(dx*dx + dy*dy)
+}
+
+export function transformData(data) {
+	const flattened = data.map((stroke, i) => {
+		return stroke.map((point) => ({
+			x: point.x,
+			y: point.y,
+			strokeId: i+1
+		}))
+	})
+	.reduce((a,b) => (a.concat(b)), [])
+	.map((point) => {
+		return new Point(point.x, point.y, point.strokeId)
+	})
+
+	return flattened
 }
