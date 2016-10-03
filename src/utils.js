@@ -19,8 +19,8 @@ export function greedyCloudMatch(points, cloud) {
 // returns distance between two clouds
 export function cloudDistance(points1, points2, start) {
   const matched = new Array(points1.length).fill(false) // points1.length === points2.length
-  var sum = 0
-  var i = start
+  let sum = 0
+  let i = start
 
   do {
     let index = -1;
@@ -90,7 +90,7 @@ export function scale(points) {
   const size = Math.max(maxX - minX, maxY - minY)
   const newPoints = []
 
-  for (int i=0; i<points.length; ++i) {
+  for (let i=0; i<points.length; ++i) {
     let qx = (points[i].x - minX) / size
     let qy = (points[i].y - minY) / size
 
@@ -104,7 +104,7 @@ export function translateTo(points, destination) {
   const centroid = centroid(points)
   const newPoints = []
 
-  for (var i=0; i<points.length; ++i) {
+  for (let i=0; i<points.length; ++i) {
     let qx = points[i].x + destination.x - centroid.x
     let qy = points[i].y + destination.y - centroid.y
 
@@ -118,7 +118,7 @@ export function centroid(points) {
   let x = 0.0
   let y = 0.0
 
-  for (var i=0; i<points.length; ++i) {
+  for (let i=0; i<points.length; ++i) {
     x += points[i].x
     y += points[i].y
   }
