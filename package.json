@@ -2,10 +2,15 @@
   "name": "wanda",
   "version": "1.0.0",
   "description": "Simple gesture recognition library for Javascript using $P algorithm.",
-  "main": "index.js",
+  "main": "dist/wanda.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "clemmy",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-core": "^6.17.0",
+    "babel-loader": "^6.2.5",
+    "babel-preset-stage-0": "^6.16.0"
+  }
 }
