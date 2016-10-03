@@ -9,6 +9,10 @@
   },
   "author": "clemmy",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clemmy/wanda"
+  },
   "devDependencies": {
     "ava": "^0.16.0",
     "babel-core": "^6.17.0",
