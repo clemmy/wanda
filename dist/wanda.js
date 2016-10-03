@@ -60,6 +60,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  value: true
 	});
 
+	var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 	var _point = __webpack_require__(1);
@@ -69,6 +71,10 @@ return /******/ (function(modules) { // webpackBootstrap
 	var _cloud = __webpack_require__(2);
 
 	var _cloud2 = _interopRequireDefault(_cloud);
+
+	var _constants = __webpack_require__(4);
+
+	var _constants2 = _interopRequireDefault(_constants);
 
 	var _utils = __webpack_require__(3);
 
@@ -83,19 +89,36 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.templates = [];
 	  }
 
+	  /* where data is an array of strokes
+	   * [ [{x,y}, {x,y}], [{x,y}] ]
+	  */
+
+
 	  _createClass(Wanda, [{
 	    key: 'train',
-	    value: function train(id, points) {
+	    value: function train(id, data) {
 	      console.log('training');
-	      this.templates.push(new _cloud2.default(id, points));
+	      var flattened = data.map(function (stroke, i) {
+	        return stroke.map(function (point) {
+	          return _extends({}, point, {
+	            strokeId: i + 1
+	          });
+	        });
+	      }).reduce(function (a, b) {
+	        return a.concat(b);
+	      }, []).map(function (point) {
+	        return new _point2.default(point.x, point.y, point.strokeId);
+	      });
+
+	      this.templates.push(new _cloud2.default(id, flattened));
 	    }
 	  }, {
 	    key: 'recognize',
 	    value: function recognize(points) {
 	      console.log('recognize');
-	      points = (0, _utils.resample)(points, NumPoints);
+	      points = (0, _utils.resample)(points, _constants2.default.NUM_POINTS);
 	      points = (0, _utils.scale)(points);
-	      points = (0, _utils.translateTo)(points, Origin);
+	      points = (0, _utils.translateTo)(points, _constants2.default.ORIGIN);
 
 	      var b = +Infinity;
 	      var u = -1;

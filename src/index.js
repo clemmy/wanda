@@ -1,5 +1,6 @@
 import Point from './point'
 import Cloud from './cloud'
+import Constants from './constants'
 import {resample, scale, translateTo, greedyCloudMatch} from './utils'
 
 export default class Wanda {
@@ -7,16 +8,30 @@ export default class Wanda {
     this.templates = []
   }
 
-  train(id, points) {
+  /* where data is an array of strokes
+   * [ [{x,y}, {x,y}], [{x,y}] ]
+  */
+  train(id, data) {
     console.log('training')
-    this.templates.push(new Cloud(id, points))
+    const flattened = data.map((stroke, i) => {
+      return stroke.map((point) => ({
+        ...point,
+        strokeId: i+1
+      }))
+    })
+    .reduce((a,b) => (a.concat(b)), [])
+    .map((point) => {
+      return new Point(point.x, point.y, point.strokeId)
+    })
+
+    this.templates.push(new Cloud(id, flattened))
   }
 
   recognize(points) {
     console.log('recognize')
-    points = resample(points, NumPoints)
+    points = resample(points, Constants.NUM_POINTS)
     points = scale(points)
-    points = translateTo(points, Origin)
+    points = translateTo(points, Constants.ORIGIN)
 
     let b = +Infinity
     let u = -1
