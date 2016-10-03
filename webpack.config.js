@@ -3,7 +3,10 @@ module.exports = {
   entry: './index.js',
   output: {
     path: __dirname + '/dist',
-    filename: 'wanda.js'
+    filename: 'wanda.js',
+    library: 'wanda',
+    libraryTarget: 'umd',
+    umdNamedDefine: true
   },
   module: {
     loaders: [
